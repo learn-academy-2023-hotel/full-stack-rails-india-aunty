@@ -1,24 +1,43 @@
-# README
+## Full Stack Rails 1/29/24 India
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Process for github empty repo
 
-Things you may want to cover:
+## Process for local app
+- Create a new Rails app on the desktop: $ rails new rails-full-stack -d postgresql -T
+- $ cd rails-full-stack
+- Create a database: $ rails db:create
+- Begin the rails server: $ rails server
+- In a browser navigate to: http://localhost:3000
+- Add the git remote from GitHub Classroom
+- Ensure a main branch exists
+- Make an initial commit to the main branch
 
-* Ruby version
+- Create a branch to add new features: $ git checkout -b dependencies
+Add the dependencies for RSpec:
+$ bundle add rspec-rails
+$ rails generate rspec:install
+Generate the model with appropriate columns and data types: $ rails g model Comedy joke:string punch_line:string
+$ rails db:migrate
+Generate the controller: $ rails g controller Comedy
 
-* System dependencies
+## Goal of App
+- Comedy full stack rails app
+- Model: Comedy with joke, punch_line. Both will strings.
 
-* Configuration
+https://github.com/learn-academy-2023-india/syllabus/blob/main/rails/restful-routes-crud.md
 
-* Database creation
+## Scaffolding the restful routes
+- CRUD: Create, Read, Update, Delete
+- RESTful routes: methods within the controller, aka action method, that map to an HTTP verb to allow crud actions to be performed within the application
+- index, show, new, create, edit, update, destroy
 
-* Database initialization
+- MVP: Minimum Viable Product, minimum requirements to have a basic functional application
+    - index, show, new, create
 
-* How to run the test suite
+- structure of scaffolding
+```rb
+```
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+require
+permit
+private

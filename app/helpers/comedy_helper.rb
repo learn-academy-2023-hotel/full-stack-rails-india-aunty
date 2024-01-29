@@ -1,0 +1,2 @@
+module ComedyHelper
+end
