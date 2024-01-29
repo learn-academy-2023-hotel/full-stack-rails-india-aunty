@@ -39,6 +39,7 @@ https://github.com/learn-academy-2023-india/syllabus/blob/main/rails/restful-rou
 
 crud action -> http verb -> restful route
 read -> get -> index
+read -> get -> show
 
 ## Work flow
 1. Add the restful route to the controller in app/controllers
@@ -47,6 +48,7 @@ read -> get -> index
 4. Verify user experience
 
 ## index branch
+read -> get -> index
 - index: display all the instances in the database
 
 1. controller
@@ -59,7 +61,7 @@ read -> get -> index
 ```rb
 # define the url with the `get` http verb that calls the index method
 # use `to:` instead of the hash rocket that is shown in the syllabus and ensure the url has a `/`
-  get '/jokes', to: 'comedy#index' 
+  get '/jokes', to: 'comedy#index', as: 'jokes' 
 ```
 3. views
 - create a view file that has the same name as the restful route that will iterate across the instance variable that is storing an array that contains all the instance in the database. Display each instance on a separate line
@@ -79,6 +81,25 @@ read -> get -> index
 ```
 4. Verify user experience:
 - Enter `http://localhost:3000/jokes` in the browser
+
+## show branch
+read -> get -> show
+- show: displays one instance from the database
+1. controller
+- The params hash will used to abstract the value of the primary key
+```rb
+def show
+  @one_joke = Comedy.find(params[:id])
+end
+```
+2. routes
+- use the same url as the index, add the requirement of a param
+```rb
+get '/jokes/:id', to: 'comedy#show', as: 'joke'
+```
+3. views
+
+
 
 require
 permit
