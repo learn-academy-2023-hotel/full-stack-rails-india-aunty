@@ -1,10 +1,5 @@
 class ComedyController < ApplicationController
   def index
-  end
-  def show
-  end
-  def new
-  end
-  def create
+    @joke_list = Comedy.all
   end
 end

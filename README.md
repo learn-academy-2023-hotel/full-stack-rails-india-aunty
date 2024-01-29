@@ -33,10 +33,52 @@ https://github.com/learn-academy-2023-india/syllabus/blob/main/rails/restful-rou
 
 - MVP: Minimum Viable Product, minimum requirements to have a basic functional application
     - index, show, new, create
+    - 
+- scaffolding: create initial data entries using the rails console
+> Comedy.create(joke: '', punch_line: '')
 
-- structure of scaffolding
+crud action -> http verb -> restful route
+read -> get -> index
+
+## Work flow
+1. Add the restful route to the controller in app/controllers
+2. Create a route for the restful route (action method) in config/routes.rb
+3. Create a views file for that restful route in app/views
+4. Verify user experience
+
+## index branch
+- index: display all the instances in the database
+
+1. controller
 ```rb
+  def index
+    @joke_list = Comedy.all
+  end
 ```
+2. routes
+```rb
+# define the url with the `get` http verb that calls the index method
+# use `to:` instead of the hash rocket that is shown in the syllabus and ensure the url has a `/`
+  get '/jokes', to: 'comedy#index' 
+```
+3. views
+- create a view file that has the same name as the restful route that will iterate across the instance variable that is storing an array that contains all the instance in the database. Display each instance on a separate line
+- use erb syntax to reference ruby code 
+    - <%= %> used to display values
+    - <% %> used to reference ruby code that will not be displayed
+
+```html
+<h1>India Comedy Factory</h1>
+<ul>
+  <% @joke_list.each do |chuckle|%>
+    <li>
+      Joke: <%= chuckle.joke %> Punch line: <%= chuckle.punch_line %>
+    </li>
+  <% end %>
+</ul>
+```
+4. Verify user experience:
+- Enter `http://localhost:3000/jokes` in the browser
 
 require
 permit

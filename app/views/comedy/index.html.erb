@@ -1,0 +1,8 @@
+<h1>India Comedy Factory</h1>
+<ul>
+  <% @joke_list.each do |chuckle|%>
+    <li>
+      Joke: <%= chuckle.joke %> Punch line: <%= chuckle.punch_line %>
+    </li>
+  <% end %>
+</ul>
