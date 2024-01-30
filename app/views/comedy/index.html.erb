@@ -1,8 +1,9 @@
 <h1>India Comedy Factory</h1>
+<h2>Click the joke to see the punch line</h2>
 <ul>
   <% @joke_list.each do |chuckle|%>
     <li>
-      Joke: <%= chuckle.joke %> Punch line: <%= chuckle.punch_line %>
+      <%= link_to "Joke: #{chuckle.joke}",  comedy_path(chuckle) %>
     </li>
   <% end %>
 </ul>
