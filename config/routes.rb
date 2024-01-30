@@ -3,7 +3,17 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  get '/jokes', to: 'comedy#index', as: 'jokes'
 
-  get '/jokes/:id', to: 'comedy#show', as: 'joke'
+  # all instances
+  get '/jokes', to: 'comedy#index', as: 'comedies'
+
+  # new instance
+  get '/jokes/new', to: 'comedy#new', as: 'new'
+  post '/jokes', to: 'comedy#create'
+  
+  # one instance
+  get '/jokes/:id', to: 'comedy#show', as: 'comedy'
+  
+
+  
 end
