@@ -239,4 +239,10 @@ create restful route: save a new instance or data entry in the database, no view
 - Add navigation to the different views/pages
 - Remove the punch line from the index view
 
+## Navigating to the show page
+- Show restful route requires a params id. Therefore, the path will receive the instance as an argument, so the url link can be created with the primary key in the url.  
+`<%= link_to "Joke: #{chuckle.joke}",  comedy_path(chuckle) %>`  
+***NOTE: Because link_to helper method requires a string for the text on the link, we used string interpolation to abstract the value at the joke key (attribute).***
+
+
 
