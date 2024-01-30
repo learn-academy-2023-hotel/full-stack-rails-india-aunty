@@ -1,0 +1,14 @@
+<h2>Add a New Joke</h2>
+
+<%= form_with model: @new_joke do |form| %>
+
+  <%= form.label :joke %>
+  <%= form.text_field :joke %>
+
+  <br>
+  <%= form.label :punch_line %>
+  <%= form.text_field :punch_line %>
+
+  <br>
+  <%= form.submit 'Add Joke' %>
+<% end %>
