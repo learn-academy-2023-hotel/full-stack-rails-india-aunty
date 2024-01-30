@@ -234,3 +234,9 @@ create restful route: save a new instance or data entry in the database, no view
     - To see on the browser: `http://localhost:3000/rails/info/routes`
     - To see in the terminal: `$ rails routes -E`
 - views file will be referencing the instance variable used on the applicable method/restful route
+
+## User experience
+- Add navigation to the different views/pages
+- Remove the punch line from the index view
+
+
