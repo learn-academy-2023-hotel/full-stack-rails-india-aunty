@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
+  # INCSEUD
   # all instances
   get '/jokes', to: 'comedy#index', as: 'comedies'
 
@@ -14,6 +15,10 @@ Rails.application.routes.draw do
   # one instance
   get '/jokes/:id', to: 'comedy#show', as: 'comedy'
   
+  # update an instance
+  get '/jokes/:id/edit', to: 'comedy#edit', as: 'edit'
+  patch '/jokes/:id', to: 'comedy#update'
 
-  
+  # destroy an instance
+  delete '/jokes/:id', to: 'comedy#destroy', as: 'destroy'
 end

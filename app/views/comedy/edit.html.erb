@@ -1,0 +1,14 @@
+<h2>Edit Your Joke</h2>
+
+<%= form_with model: @modified_joke, method: :patch do |form| %>
+
+  <%= form.label :joke %>
+  <%= form.text_field :joke %>
+
+  <br>
+  <%= form.label :punch_line %>
+  <%= form.text_field :punch_line %>
+
+  <br>
+  <%= form.submit 'Change Joke' %>
+<% end %>
