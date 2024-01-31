@@ -58,6 +58,8 @@
     read -> get -> show
     read -> get -> new
     create -> post -> create
+    update -> patch -> update
+    update -> put -> update
 
 ## Plans for application
 ### Scaffolding
@@ -244,5 +246,65 @@ create restful route: save a new instance or data entry in the database, no view
 `<%= link_to "Joke: #{chuckle.joke}",  comedy_path(chuckle) %>`  
 ***NOTE: Because link_to helper method requires a string for the text on the link, we used string interpolation to abstract the value at the joke key (attribute).***
 
+## branch update
+read -> get -> edit
+update -> patch -> update
+update -> put -> update
+
+edit restful route: provides an html form that displays the values for an existing instance, needs a params id to specify which instance is being updated 
+1. controller
+```rb
+  def edit
+    @modified_joke = Comedy.find(params[:id]) 
+  end
+```
+2. routes - Make sure to follow the INCSEUD pattern on the routes file
+
+3. views - Make sure to specify the patch method
+4. user experience  
+`http://localhost:3000/jokes/6/edit`  
 
 
+update restful route: used to saved the modifications to an instance, needs a params id to specify which instance is being updated, no view necessary 
+1. controller
+```rb
+  def update
+    # abstract the instance
+    @modified_joke = Comedy.find(params[:id])
+    # update the permitted attributes as specified as specified by the strong params 
+    @modified_joke.update(joke_params)
+    # if valid redirect to the show page
+    if @modified_joke.valid?
+      redirect_to comedy_path
+    end
+  end
+```
+2. routes: make sure to use the patch http verb
+3. user experience
+
+## destroy
+delete -> delete -> destroy
+
+destroy restful route: used to remove an existing instance, needs a params id to specify which instance is being updated, no view necessary
+
+1. controller
+```rb
+  def destroy
+    @no_joke = Comedy.find(params[:id])
+    @no_joke.destroy
+    redirect_to comedies_path
+  end
+```
+2. route: http verb delete
+3. views
+- Allow a button to trigger the destroy method on the show page
+
+
+
+
+
+
+
+
+
+https://github.com/learn-academy-2023-india/syllabus/blob/main/rails/restful-routes-crud.md
