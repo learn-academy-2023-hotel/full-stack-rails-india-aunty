@@ -1,3 +1,7 @@
+<%= button_to 'Home', comedies_path, method: :get %>
+<%= button_to 'Back to Joke', comedy_path(@modified_joke), method: :get %>
+
+
 <h2>Edit Your Joke</h2>
 
 <%= form_with model: @modified_joke, method: :patch do |form| %>
