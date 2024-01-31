@@ -44,13 +44,13 @@
 - Generate the controller: `$ rails g controller Comedy`
 
 ## Restful routes
-- [Review of restful routes](https://github.com/learn-academy-2023-india/syllabus/blob/main/rails/restful-routes-crud.md)  
+[Review of restful routes](https://github.com/learn-academy-2023-india/syllabus/blob/main/rails/restful-routes-crud.md)  
 
 - RESTful routes: index, show, new, create, edit, update, destroy
 - HTTP verbs: get, post, put, patch, delete
 - CRUD: Create, Read, Update, Delete
 
-- RESTful routes: methods within the controller, aka action method, that map to an HTTP verb to allow crud actions to be performed within the application
+- RESTful routes: methods within the controller, aka action method, that map to an HTTP verb to allow crud actions to be performed within the application  
 ***NOTE: The order that restful routes need to be place on the routes.rb is INCSEUD (ink-say-ud): index, new, create, show, edit, update, destroy.***
 
 ### crud action -> http verb -> restful route
@@ -60,6 +60,7 @@
     create -> post -> create
     update -> patch -> update
     update -> put -> update
+    delete -> delete -> destroy  
 
 ## Plans for application
 ### Scaffolding
@@ -83,9 +84,11 @@
 4. Create a views file for that restful route in app/views
 5. Verify user experience
 
-## index branch
-read -> get -> index  
-index restful route: display all the instances in the database
+## display all the instances 
+branch: index     
+index restful route: display all the instances in the database 
+
+read -> get -> index   
 
 1. controller
 ```rb
@@ -93,17 +96,19 @@ index restful route: display all the instances in the database
     @joke_list = Comedy.all
   end
 ```
+
 2. routes
 ```rb
 # define the url with the `get` http verb that calls the index method
 # use `to:` instead of the hash rocket that is shown in the syllabus and ensure the url has a `/`
   get '/jokes', to: 'comedy#index', as: 'jokes' 
 ```
-3. views
-- Create a views file that has the same name as the restful route that will iterate across the array stored by the instance variable. Display each instance on a separate line.
+
+3. views  
+Create a views file that has the same name as the restful route that will iterate across the array stored by the instance variable. Display each instance on a separate line.
 - use erb syntax to reference ruby code 
-    - <%= %> used to display values
-    - <% %> used to reference ruby code that will not be displayed
+    - `<%= %>` used to display values
+    - `<% %>` used to reference ruby code that will not be displayed
 
 ```html
 <h1>India Comedy Factory</h1>
@@ -115,38 +120,47 @@ index restful route: display all the instances in the database
   <% end %>
 </ul>
 ```
+
 4. Verify user experience:
 - Enter `http://localhost:3000/jokes` in the browser
 
-## show branch
-read -> get -> show  
-show restful route: displays one instance from the database
+## display one instance
+branch: show 
 
-1. controller
-- The params hash will be used to abstract the value of the primary key from the url.
+show restful route: displays one instance from the database 
+
+read -> get -> show  
+
+1. controller  
+The params hash will be used to abstract the value of the primary key from the url.
 ```rb
 def show
   @one_joke = Comedy.find(params[:id])
 end
 ```
+
 2. routes
 - use the same url as the index, add the requirement of a param
 ```rb
 get '/jokes/:id', to: 'comedy#show', as: 'joke'
 ```
+
 3. views
 - use dot notation to display the values of each applicable column
+
 4. Verify user experience. Remember to provide an applicable primary key from the database.
 - Enter `http://localhost:3000/jokes/2` in the browser
 
-## new-instance branch
+## create a new instance
+branch: new-instance
 - Instead of creating a new instance in the rails console:  
 `> Comedy.create(joke: 'Why do programmers prefer dark mode?', punch_line: 'Because light attracts bugs.')`
 - User input will be used to create a new instance and then saved to the database using the new and create restful routes.  
 
 ### new 
-read -> get -> new  
 new restful route: a html form that collects user input for the values that will be saved for a new instance or data entry in the database
+
+read -> get -> new  
 
 1. controller
 ```rb
@@ -154,10 +168,12 @@ new restful route: a html form that collects user input for the values that will
     @new_joke = Comedy.new
   end
 ```
+
 2. route
 ```rb
   get '/jokes/new', to: 'comedy#new', as: 'new'
 ```
+
 3. views
 ```html
 <h2>Add a New Joke</h2>
@@ -177,16 +193,18 @@ new restful route: a html form that collects user input for the values that will
   <%= form.submit 'Add Joke' %>
 <% end %>
 ```
+
 4. Verify user experience
 - To see the form:   
 `http://localhost:3000/jokes/new`  
 
 ### create
-create -> post -> create  
-create restful route: save a new instance or data entry in the database, no views will be required for this route because its role is to save data not display it. 
+create restful route: saves a new instance or data entry in the database, no views will be required for this route because its role is to save data not display it.
 
-1. controller
-- create restful route will restrict how the user interacts with the database using the following:  
+create -> post -> create  
+
+1. controller  
+Create restful route will restrict how the user interacts with the database using the following:  
 
     a) `private`: prevents access to certain data/methods across the application
 
@@ -215,6 +233,7 @@ create restful route: save a new instance or data entry in the database, no view
     params.require(:comedy).permit(:joke, :punch_line)
   end
 ```
+
 2. routes
 `post '/jokes', to: 'comedy#create'`
 
@@ -229,43 +248,59 @@ create restful route: save a new instance or data entry in the database, no view
     d) If the instance is valid, the index page should be displayed  
 
 ## Additional notes
-- Rails will require the alias for the index restful route to be the model name
+Rails will require the alias for the index restful route to be the model name
   - plural for the index
-  - singular for the show
-- To see available urls (routes created from the config/routes.rb)
-    - To see on the browser: `http://localhost:3000/rails/info/routes`
-    - To see in the terminal: `$ rails routes -E`
-- views file will be referencing the instance variable used on the applicable method/restful route
+  - singular for the show  
+
+To see available urls (routes created from the config/routes.rb)  
+  - To see on the browser: `http://localhost:3000/rails/info/routes`
+  - To see in the terminal: `$ rails routes -E`  
+
+Views file will be referencing the instance variable used on the applicable method/restful route
 
 ## User experience
+branch: link  
 - Add navigation to the different views/pages
 - Remove the punch line from the index view
 
-## Navigating to the show page
-- Show restful route requires a params id. Therefore, the path will receive the instance as an argument, so the url link can be created with the primary key in the url.  
+### Navigate to the show page
+A link will be created on the index page. To create a URL link to the show route for a specific instance, we use the ID in the URL. Therefore, the path will receive the instance as an argument.  
 `<%= link_to "Joke: #{chuckle.joke}",  comedy_path(chuckle) %>`  
 ***NOTE: Because link_to helper method requires a string for the text on the link, we used string interpolation to abstract the value at the joke key (attribute).***
 
-## branch update
-read -> get -> edit
-update -> patch -> update
-update -> put -> update
+## Ice Box
+features that enhance the user experience beyond the MVP 
+  - Allow a user to modify an existing instance in the database --> edit, update
+  - Allow a user to remove an existing instance in the database --> destroy
 
-edit restful route: provides an html form that displays the values for an existing instance, needs a params id to specify which instance is being updated 
+## modify an existing instance
+User input will be used to modify an existing instance and then save it to the database using the edit and update restful routes. 
+branch: modify
+
+### edit
+edit restful route: provides an html form that displays the values for an existing instance, needs a params id to specify which instance is being updated   
+
+read -> get -> edit  
+
 1. controller
 ```rb
   def edit
     @modified_joke = Comedy.find(params[:id]) 
   end
 ```
+
 2. routes - Make sure to follow the INCSEUD pattern on the routes file
 
 3. views - Make sure to specify the patch method
+
 4. user experience  
 `http://localhost:3000/jokes/6/edit`  
 
+### update
+update restful route: used to saved the modifications to an instance, needs a params id to specify which instance is being updated, no view necessary   
 
-update restful route: used to saved the modifications to an instance, needs a params id to specify which instance is being updated, no view necessary 
+update -> patch -> update  
+
 1. controller
 ```rb
   def update
@@ -279,13 +314,15 @@ update restful route: used to saved the modifications to an instance, needs a pa
     end
   end
 ```
+
 2. routes: make sure to use the patch http verb
+
 3. user experience
 
-## destroy
-delete -> delete -> destroy
+## remove an existing instance
+destroy restful route: used to remove an existing instance, needs a params id to specify which instance is being updated, no view necessary  
 
-destroy restful route: used to remove an existing instance, needs a params id to specify which instance is being updated, no view necessary
+delete -> delete -> destroy  
 
 1. controller
 ```rb
@@ -296,15 +333,15 @@ destroy restful route: used to remove an existing instance, needs a params id to
   end
 ```
 2. route: http verb delete
-3. views
-- Allow a button to trigger the destroy method on the show page
 
+3. views  
+    a) need a button to trigger the method  
+    b) create alias for destroy RESTful route  
+    c) using helper method button_to which takes in three arguments:   
+      - text to be on button   
+      - destroy path that takes in the variable  
+      - method option that maps to the delete http verb  
+    d) place button on show.html.erb    
+`<%= button_to 'Delete this joke', destroy_path(@one_joke), method: :delete %>`    
 
-
-
-
-
-
-
-
-https://github.com/learn-academy-2023-india/syllabus/blob/main/rails/restful-routes-crud.md
+4. user experience
